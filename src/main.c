@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:27:53 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/09 16:13:36 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:31:36 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_map	*init_map(void)
 
 void	init_data(t_data *data)
 {
+	data->str = NULL;
 	data->map = init_map();
 }
 

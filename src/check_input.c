@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:02:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/09 17:22:34 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:04:56 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,32 @@ void	check_av1(char	**av, t_data *data)
 		return (printf("Error : The input file must not be a directory.\n"), ft_free_data(data), exit(EXIT_FAILURE));
 }
 
-void	parse_map(t_data *data, int fd, char *str)
+void	parse_map(t_data *data)
 {
 	static int	i;
 
-	(void)fd;
 	data->map->map = ft_realloc(data->map->map, sizeof(char *) * i, sizeof(char *) * (i + 1));
-	data->map->map[i] = ft_strdup(str);
+	data->map->map[i] = ft_strdup(data->str);
 	i++;
 }
 
-void	parse_args(t_data *data, int fd, char *str)
+void	parse_args(t_data *data)
 {
 	int		i;
 
-	(void)fd;
-	i = ft_isspace(str);
-	if (str[i] == 'N' && str[i + 1] == 'O')
-		data->map->no = check_xpm(data, str, i);
-	else if (str[i] == 'S' && str[i + 1] == 'O')
-		data->map->so = check_xpm(data, str, i);
-	else if (str[i] == 'W' && str[i + 1] == 'E')
-		data->map->we = check_xpm(data, str, i);
-	else if (str[i] == 'E' && str[i + 1] == 'A')
-		data->map->ea = check_xpm(data, str, i);
-	else if (str[i] == 'F' && str[i + 1] == ' ')
-		data->map->f = check_rgb(data, str, i);
-	else if (str[i] == 'C' && str[i + 1] == ' ')
-		data->map->c = check_rgb(data, str, i);
+	i = ft_isspace(data->str);
+	if (data->str[i] == 'N' && data->str[i + 1] == 'O')
+		data->map->no = check_xpm(data, i);
+	else if (data->str[i] == 'S' && data->str[i + 1] == 'O')
+		data->map->so = check_xpm(data, i);
+	else if (data->str[i] == 'W' && data->str[i + 1] == 'E')
+		data->map->we = check_xpm(data, i);
+	else if (data->str[i] == 'E' && data->str[i + 1] == 'A')
+		data->map->ea = check_xpm(data, i);
+	else if (data->str[i] == 'F' && data->str[i + 1] == ' ')
+		data->map->f = check_rgb(data, i);
+	else if (data->str[i] == 'C' && data->str[i + 1] == ' ')
+		data->map->c = check_rgb(data, i);
 	else
 		return (printf("Error : Bad argument implementation.\nThe possibilities are NO, SO, WE, EA, F or C.\n"), ft_free_data(data), exit(EXIT_FAILURE));
 }
@@ -70,31 +68,32 @@ void	remove_endl(char *str)
 
 int	check_input(char **av, t_data *data)
 {
-	int		fd;
-	char	*str;
-
 	check_av1(av, data);
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	data->fd = open(av[1], O_RDONLY);
+	if (data->fd == -1)
 		return (printf("Error while opening the file !\n"), ft_free_data(data), exit(EXIT_FAILURE), 0);
 	while (1)
 	{
-		str = get_next_line(fd);
-		if (!str)
-			break ;
-		else if (str[0] == '\n')
+		data->str = get_next_line(data->fd, 0);
+		if (!data->str)
 		{
-			free(str);
+			get_next_line(data->fd, 1);
+			break ;
+		}
+		else if (data->str[0] == '\n')
+		{
+			free(data->str);
 			continue ;
 		}
-		remove_endl(str);
-		printf("%s\n", str);
+		remove_endl(data->str);
+		printf("%s\n", data->str);
 		if (data->map->nb_params == 6)
-			parse_map(data, fd, str);
+			parse_map(data);
 		else
-			parse_args(data, fd, str);
-		free(str);
+			parse_args(data);
+		free(data->str);
 	}
 	ft_free_data(data);
+	close(data->fd);
 	return (1);
 }

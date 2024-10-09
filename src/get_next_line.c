@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:07:18 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/09 17:32:20 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:13:22 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ char	*clean_stash(char *stash)
 	i = 0;
 	while (stash[i] != '\n' && stash[i] != '\0')
 		i++;
-	if (stash[i] == '\0')
-		return (ft_free(stash, 0));
+	if (stash[i] == '\0' || (stash[i] == '\n' && stash[i + 1] == '\0'))
+		return (free(stash), NULL);
 	tmp = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (tmp == NULL)
 		return (ft_free(stash, 0));
@@ -96,11 +96,13 @@ char	*clean_stash(char *stash)
 	return (tmp);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int flag)
 {
 	char		*line;
 	static char	*stash;
 
+	if (flag == 1)
+		return (free(stash), NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (stash == NULL)
@@ -113,5 +115,6 @@ char	*get_next_line(int fd)
 	line = fill_line(stash);
 	if (line == NULL)
 		return (free(stash), stash = 0, NULL);
-	return (stash = clean_stash(stash), line);
+	stash = clean_stash(stash);
+	return (line);
 }

@@ -6,13 +6,13 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:08:18 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/09 17:02:32 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:03:42 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*ft_strcpy_cub(char *dest, char *src, int size, int j)
+void	ft_strcpy_cub(char *dest, char *src, int size, int j)
 {
 	int	i;
 
@@ -24,7 +24,6 @@ char	*ft_strcpy_cub(char *dest, char *src, int size, int j)
 		j++;
 	}
 	dest[i] = '\0';
-	return (dest);
 }
 
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
@@ -61,27 +60,34 @@ int	ft_isspace(char *str)
 	return (i);
 }
 
-char	*check_xpm(t_data *data, char *str, int i)
+char	*check_xpm(t_data *data, int i)
 {
 	char	*str1;
 	char	*str2;
 
 	i += 2;
-	while (!ft_isalnum(str[i]))
+	while (!ft_isalnum(data->str[i]))
 		i++;
-	str2 = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
+	str2 = malloc(sizeof(char) * (ft_strlen(data->str) - i + 1));
 	if (!str2)
-		return (NULL);
-	str2 = ft_strcpy_cub(str2, str, (ft_strlen(str) - i), i);
-	while (str[i])
+		return (ft_free_data(data), get_next_line(data->fd, 1), NULL);
+	ft_strcpy_cub(str2, data->str, (ft_strlen(data->str) - i), i);
+	printf("%s\n", str2);
+	while (data->str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t')
-			return (printf("Bad xpm input, found a whitespace.\n"), ft_free_data(data), exit(EXIT_FAILURE), NULL);
+		if (data->str[i] == ' ' || data->str[i] == '\t')
+		{
+			free(str2);
+			printf("Bad xpm input, found a whitespace.\n");
+			get_next_line(data->fd, 1);
+			ft_free_data(data);
+			exit(EXIT_FAILURE);
+		}
 		i++;
 	}
-	str1 = ft_strrchr(str, '.');
+	str1 = ft_strrchr(data->str, '.');
 	if (ft_strncmp(str1, ".xpm", 4) != 0)
-		return (printf("No .xpm at end of file.\n"), ft_free_data(data), NULL);
+		return (printf("No .xpm at end of file.\n"), ft_free_data(data), get_next_line(data->fd, 1), free(str2), exit(EXIT_FAILURE),  NULL);
 	data->map->nb_params += 1;
 	return (str2);
 }
@@ -100,18 +106,18 @@ int	check_whitespace(char *str)
 	return (1);
 }
 
-int	check_rgb(t_data *data, char *str, int i)
+int	check_rgb(t_data *data, int i)
 {
 	char	**tab;
 	char	*new_str;
 
 	i += 1;
-	while (!ft_isalnum(str[i]))
+	while (!ft_isalnum(data->str[i]))
 		i++;
-	new_str = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
+	new_str = malloc(sizeof(char) * (ft_strlen(data->str) - i + 1));
 	if (!new_str)
 		return (0);
-	new_str = ft_strcpy_cub(new_str, str, (ft_strlen(str) - i), i);
+	ft_strcpy_cub(new_str, data->str, (ft_strlen(data->str) - i), i);
 	i = 0;
 	if (check_whitespace(new_str) == 0)
 		return (printf("Bad rgb input, found a whitespace.\n"), exit(EXIT_FAILURE), 0);

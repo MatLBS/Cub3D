@@ -6,14 +6,14 @@
 #    By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 21:07:58 by matle-br          #+#    #+#              #
-#    Updated: 2024/10/09 16:58:07 by matle-br         ###   ########.fr        #
+#    Updated: 2024/10/09 18:11:45 by matle-br         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Cub3D
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 MLX_FLAGS = -lmlx -lX11 -lXext -lm -lz
 GREEN = \033[32m
 YELLOW = \033[33m
