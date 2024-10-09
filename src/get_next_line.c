@@ -6,16 +6,15 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:07:18 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/09 09:07:44 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:32:20 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
-char	*ft_free_line(char *str, char *str2)
+static char	*ft_free(char *str, char *str2)
 {
-	if (str != NULL)
-		free(str);
+	free(str);
 	if (str2 == NULL)
 		return (NULL);
 	free(str2);
@@ -28,21 +27,21 @@ char	*fill_stash(int fd, char *stash)
 	char	*tmp;
 	int		bytes_read;
 
-	bytes_read = 0;
+	bytes_read = 1;
 	buff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (buff == NULL)
-		return (ft_free_line(stash, NULL));
-	while (1)
+		return (ft_free(stash, 0));
+	while (bytes_read)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
-		if (bytes_read <= 0)
-			return (ft_free_line(buff, stash));
+		if (bytes_read < 0)
+			return (ft_free(stash, buff));
 		buff[bytes_read] = '\0';
 		tmp = ft_strjoin(stash, buff);
 		free(stash);
 		stash = tmp;
 		if (stash == NULL)
-			return (ft_free_line(buff, NULL));
+			return (ft_free(buff, 0));
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
@@ -65,8 +64,7 @@ char	*fill_line(char *stash)
 	line = malloc(sizeof(char) * (i + 1));
 	if (line == NULL)
 		return (NULL);
-	line[i] = '\0';
-	i--;
+	line[i--] = '\0';
 	while (i >= 0)
 	{
 		line[i] = stash[i];
@@ -84,11 +82,11 @@ char	*clean_stash(char *stash)
 	i = 0;
 	while (stash[i] != '\n' && stash[i] != '\0')
 		i++;
-	if (ft_strchr(stash, '\0'))
-		return (ft_free_line(stash, 0));
+	if (stash[i] == '\0')
+		return (ft_free(stash, 0));
 	tmp = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (tmp == NULL)
-		return (ft_free_line(stash, NULL));
+		return (ft_free(stash, 0));
 	i++;
 	j = 0;
 	while (stash[i] != '\0')
@@ -113,12 +111,7 @@ char	*get_next_line(int fd)
 	if (stash == NULL)
 		return (NULL);
 	line = fill_line(stash);
-	if (!line)
-	{
-		free(stash);
-		stash = NULL;
-		return (NULL);
-	}
-	stash = clean_stash(stash);
-	return (line);
+	if (line == NULL)
+		return (free(stash), stash = 0, NULL);
+	return (stash = clean_stash(stash), line);
 }

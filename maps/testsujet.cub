@@ -1,7 +1,7 @@
-NO ./quelquechose.xpm
-       SO ./quelquechose.xpm
-WE          ./quelquechose.xpm
-   EA       ./quelquechose.xpm
+N O ./quelquechose.xpm
+          SO      ./jsp.xpm
+WE          ./coucou.xpm
+       EA       ./bonjour.xpm
 
         F 220,100,0
   C        225,30,0
