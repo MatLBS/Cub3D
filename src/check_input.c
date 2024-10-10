@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:02:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/09 19:04:56 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:52:55 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	parse_map(t_data *data)
 {
 	static int	i;
 
-	data->map->map = ft_realloc(data->map->map, sizeof(char *) * i, sizeof(char *) * (i + 1));
+	data->map->map = ft_realloc(data->map->map, sizeof(char *) * i, sizeof(char *) * (i + 2));
 	data->map->map[i] = ft_strdup(data->str);
+	data->map->map[i + 1] = NULL;
 	i++;
 }
 
@@ -38,21 +39,29 @@ void	parse_args(t_data *data)
 {
 	int		i;
 
+	if (data->str[0] == '\0')
+		return;
 	i = ft_isspace(data->str);
-	if (data->str[i] == 'N' && data->str[i + 1] == 'O')
+	if (data->str[i] == 'N' && data->str[i + 1] == 'O' && !data->map->no)
 		data->map->no = check_xpm(data, i);
-	else if (data->str[i] == 'S' && data->str[i + 1] == 'O')
+	else if (data->str[i] == 'S' && data->str[i + 1] == 'O' && !data->map->so)
 		data->map->so = check_xpm(data, i);
-	else if (data->str[i] == 'W' && data->str[i + 1] == 'E')
+	else if (data->str[i] == 'W' && data->str[i + 1] == 'E' && !data->map->we)
 		data->map->we = check_xpm(data, i);
-	else if (data->str[i] == 'E' && data->str[i + 1] == 'A')
+	else if (data->str[i] == 'E' && data->str[i + 1] == 'A' && !data->map->ea)
 		data->map->ea = check_xpm(data, i);
-	else if (data->str[i] == 'F' && data->str[i + 1] == ' ')
+	else if (data->str[i] == 'F' && data->str[i + 1] == ' ' && !data->map->f)
 		data->map->f = check_rgb(data, i);
-	else if (data->str[i] == 'C' && data->str[i + 1] == ' ')
+	else if (data->str[i] == 'C' && data->str[i + 1] == ' ' && !data->map->c)
 		data->map->c = check_rgb(data, i);
 	else
-		return (printf("Error : Bad argument implementation.\nThe possibilities are NO, SO, WE, EA, F or C.\n"), ft_free_data(data), exit(EXIT_FAILURE));
+	{
+		printf("Error : Bad argument implementation.\n\
+The possibilities are NO, SO, WE, EA, F or C.\n");
+		get_next_line(data->fd, 1);
+		ft_free_data(data);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	remove_endl(char *str)
@@ -80,20 +89,14 @@ int	check_input(char **av, t_data *data)
 			get_next_line(data->fd, 1);
 			break ;
 		}
-		else if (data->str[0] == '\n')
-		{
-			free(data->str);
-			continue ;
-		}
 		remove_endl(data->str);
-		printf("%s\n", data->str);
-		if (data->map->nb_params == 6)
+		if (data->map->nb_params >= 6)
 			parse_map(data);
 		else
 			parse_args(data);
 		free(data->str);
 	}
-	ft_free_data(data);
+	check_map(data);
 	close(data->fd);
 	return (1);
 }

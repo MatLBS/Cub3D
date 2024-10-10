@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/09 19:05:03 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:32:54 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_map
 	int		f;
 	int		c;
 	int		nb_params;
+	char	pos_player;
+	int		player;
 	char	**map;
 }	t_map;
 
@@ -62,12 +64,25 @@ void	remove_endl(char *str);
 int		check_input(char **av, t_data *data);
 
 /* parsing_utils.c */
-void	ft_strcpy_cub(char *dest, char *src, int size, int j);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void	ft_free_cub(char **tab);
 int		ft_isspace(char *str);
 char	*check_xpm(t_data *data, int i);
 int		check_whitespace(char *str);
 int		check_rgb(t_data *data, int i);
+
+/* parsing_utils2.c */
+void	ft_strcpy_cub(char *dest, char *src, int size, int j);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+int		check_rgb_suite(char **tab, t_data *data, char *new_str);
+int		check_number(char *str);
+int		check_sides(char *str, t_data *data);
+
+/* check_map.c */
+int		check_space(t_data *data, char **tab, int i);
+int		check_line(char *str, t_data *data);
+int		check_first_line(char **tab, t_data *data, int i);
+int		check_last_line(char **tab, t_data *data, int i);
+int		check_map(t_data *data);
 
 /* free.c */
 void	ft_free_data(t_data *data);
