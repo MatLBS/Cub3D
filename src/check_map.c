@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:32:15 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/10 17:30:25 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:19:42 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_space(t_data *data, char **tab, int i)
 	return (1);
 }
 
-int	check_line(char *str, t_data *data)
+int	check_line(char *str, t_data *data, int y)
 {
 	int	i;
 
@@ -58,6 +58,8 @@ int	check_line(char *str, t_data *data)
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
 		{
 			data->map->player += 1;
+			data->player->posX = i;
+			data->player->posY = y;
 			data->map->pos_player = str[i];
 		}
 	}
@@ -133,7 +135,7 @@ int	check_map(t_data *data)
 	i++;
 	while (data->map->map[i + 1])
 	{
-		check_line(data->map->map[i], data);
+		check_line(data->map->map[i], data, i);
 		check_sides(data->map->map[i], data);
 		check_space(data, data->map->map, i);
 		i++;

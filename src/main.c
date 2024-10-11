@@ -6,36 +6,16 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:27:53 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/10 15:15:52 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:36:29 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_map	*init_map(void)
+void	handle_events(t_data *data)
 {
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if (!map)
-		printf("Error while allocating  map.\n"), exit(EXIT_FAILURE);
-	map->no = NULL;
-	map->so = NULL;
-	map->we = NULL;
-	map->ea = NULL;
-	map->map = NULL;
-	map->pos_player = 0;
-	map->player = 0;
-	map->f = 0;
-	map->c = 0;
-	map->nb_params = 0;
-	return (map);
-}
-
-void	init_data(t_data *data)
-{
-	data->str = NULL;
-	data->map = init_map();
+	mlx_hook(data->win, KeyPress, KeyPressMask, key_handler, data);
+	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, c_handler, data);
 }
 
 int	main(int ac, char **av)
@@ -45,7 +25,11 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (printf("Error: Not enough arguments.\n"), 0);
 	init_data(&data);
+	init_mlx(&data);
 	check_input(av, &data);
+	handle_events(&data);
+	create_game(&data);
+	mlx_loop(data.mlx);
 	// printf("no = %s\n", data.map->no);
 	// printf("so = %s\n", data.map->so);
 	// printf("we = %s\n", data.map->we);
