@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:55:55 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/10 14:40:06 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:46:02 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ void	ft_free_data(t_data *data)
 		ft_free_cub(data->map->map);
 	if (data->map)
 		free(data->map);
+	if (data->player)
+		free(data->player);
+	if (data->wall)
+		free(data->wall);
 	if (data->str)
 		free(data->str);
 }

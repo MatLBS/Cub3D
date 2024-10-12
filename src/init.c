@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:36:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/11 18:43:48 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/12 20:36:23 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_player	*init_player(t_data *data)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (printf("Error while allocating player.\n"), \
-			free(data->map), exit(EXIT_FAILURE), NULL);
+			ft_free_data(data), exit(EXIT_FAILURE), NULL);
 	player->posX = 0;
 	player->posY = 0;
 	player->dirX = 0;
@@ -57,8 +57,26 @@ t_player	*init_player(t_data *data)
 	player->cameraX = 0;
 	player->rayDirX = 0;
 	player->rayDirY = 0;
-	player->perpWallDist = 0;
 	return (player);
+}
+
+t_wall	*init_wall(t_data *data)
+{
+	t_wall	*wall;
+
+	wall = malloc(sizeof(t_map));
+	if (!wall)
+		return (printf("Error while allocating wall.\n"), \
+			ft_free_data(data), exit(EXIT_FAILURE), NULL);
+	wall->perpWallDist = 0;
+	wall->lineHeight = 0;
+	wall->drawEnd = 0;
+	wall->drawStart = 0;
+	wall->color = 0;
+	wall->width_xpm = 100;
+	wall->height_xpm = 100;
+	return (wall);
+
 }
 
 void	init_data(t_data *data)
@@ -68,6 +86,7 @@ void	init_data(t_data *data)
 	data->height = 0;
 	data->map = init_map();
 	data->player = init_player(data);
+	data->wall = init_wall(data);
 }
 
 void	init_mlx(t_data *data)

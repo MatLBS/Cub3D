@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/11 18:43:39 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/12 20:36:08 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 # define WIDTH 800
 # define HEIGHT 800
+# define WIDTH_XPM 100
+# define HEIGHT_XPM 100
 
 typedef struct s_map
 {
@@ -42,22 +44,16 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
-typedef struct s_data
+typedef struct s_wall
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	int			fd;
-	char		*str;
-	int			width;
-	int			height;
-	t_player	*player;
-	t_map		*map;
-}	t_data;
+	double	perpWallDist;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	int		color;
+	int		width_xpm;
+	int		height_xpm;
+}	t_wall;
 
 typedef struct s_player
 {
@@ -78,8 +74,27 @@ typedef struct s_player
 	double	cameraX;
 	double	rayDirX;
 	double	rayDirY;
-	double	perpWallDist;
 }	t_player;
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	void		*img_ptr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			fd;
+	char		*str;
+	int			width;
+	int			height;
+	t_player	*player;
+	t_map		*map;
+	t_wall		*wall;
+}	t_data;
+
 
 /* get_next_line.c */
 char		*fill_stash(int fd, char *stash);
@@ -133,5 +148,6 @@ void		create_game(t_data *data);
 
 /* games_utils.c */
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int			get_texture_color(t_data *data, int texX, int texY, int texWidth);
 
 #endif
