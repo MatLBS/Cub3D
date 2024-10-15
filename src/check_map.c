@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:32:15 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/11 16:19:42 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:41:16 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,9 @@ int	check_map(t_data *data)
 		i++;
 	}
 	check_last_line(data->map->map, data, i);
-	if (data->map->player > 1)
+	if (data->map->player > 1 || data->map->player == 0)
 	{
-		printf("Error : Too many players on the map.\n");
+		printf("Error : There is not the right numbers of player on the map.\n");
 		ft_free_data(data);
 		return (exit(EXIT_FAILURE), 0);
 	}

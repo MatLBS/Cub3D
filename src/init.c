@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:36:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/12 20:36:23 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:39:13 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,17 @@ t_wall	*init_wall(t_data *data)
 	return (wall);
 
 }
+
+// t_img	*init_imgs(t_data *data)
+// {
+// 	t_img	*imgs;
+
+// 	imgs = malloc(sizeof(t_img) * 6);
+// 	if (!imgs)
+// 		return (printf("Error while allocating imgs.\n"), \
+// 			ft_free_data(data), exit(EXIT_FAILURE), NULL);
+// 	return (imgs);
+// }
 
 void	init_data(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:55:55 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/12 12:46:02 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:47:55 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	ft_free_cub(char **tab)
 	free(tab);
 }
 
+void	ft_free_images(t_data *data)
+{
+	(void)data;
+	//TO DO
+}
+
 void	ft_free_data(t_data *data)
 {
 	if (data->map->no)
@@ -51,4 +57,6 @@ void	ft_free_data(t_data *data)
 		free(data->wall);
 	if (data->str)
 		free(data->str);
+	if (data->img)
+		ft_free_images(data);
 }

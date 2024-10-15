@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/12 20:36:08 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:06:41 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@
 # define HEIGHT 800
 # define WIDTH_XPM 100
 # define HEIGHT_XPM 100
+# define MOVE_SPEED 0.2
+
+/* ----------- Définition de mes images -------------*/
+
+# define BACKGROUND 0
+# define NORTH 1
+# define SOUTH 2
+# define EAST 3
+# define WEST 4
+
+/*---------------------------------------------------*/
 
 typedef struct s_map
 {
@@ -65,10 +76,10 @@ typedef struct s_player
 	int		mapY;
 	int		stepX;
 	int		stepY;
-	int		sideDistX;
-	int		sideDistY;
-	int		deltaDistX;
-	int		deltaDistY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
 	double	planeX;
 	double	planeY;
 	double	cameraX;
@@ -76,13 +87,23 @@ typedef struct s_player
 	double	rayDirY;
 }	t_player;
 
+typedef struct s_img
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
+}	t_img;
+
 typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
 	void		*img;
 	char		*addr;
-	void		*img_ptr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -93,6 +114,7 @@ typedef struct s_data
 	t_player	*player;
 	t_map		*map;
 	t_wall		*wall;
+	t_img		tab_img[5];
 }	t_data;
 
 
@@ -142,12 +164,25 @@ void		init_mlx(t_data *data);
 /* events.c */
 int			c_handler(t_data *data);
 int			key_handler(int key, t_data *data);
+int			check_keys(t_data *data);
 
-/* games.c */
-void		create_game(t_data *data);
+/* raycasting.c */
+void		algo_dda_suite(t_data *data);
+void		algo_dda(t_data *data);
+void		display_wall(t_data *data, int x);
+void		launch_rays(t_data *data);
+void		raycasting(t_data *data);
 
-/* games_utils.c */
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+/* raycasting_utils.c */
+void		which_fov(t_data *data);
+void		which_position(t_data *data);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void		my_mlx_pixel_put_data(t_data *data, int x, int y, int color);
 int			get_texture_color(t_data *data, int texX, int texY, int texWidth);
+
+/* images.c */
+void		generate_background(t_img *img, t_data *data);
+void		create_img(t_img *img, t_data *data, char *pathfile);
+void		create_imgs(t_data *data);
 
 #endif

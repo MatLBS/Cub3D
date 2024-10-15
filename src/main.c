@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:27:53 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/11 14:36:29 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:42:08 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	handle_events(t_data *data)
 {
-	mlx_hook(data->win, KeyPress, KeyPressMask, key_handler, data);
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, c_handler, data);
+	// mlx_loop_hook(data->mlx, check_keys, data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, key_handler, data);
 }
 
 int	main(int ac, char **av)
@@ -25,23 +26,12 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (printf("Error: Not enough arguments.\n"), 0);
 	init_data(&data);
-	init_mlx(&data);
 	check_input(av, &data);
+	init_mlx(&data);
+	create_imgs(&data);
+	raycasting(&data);
 	handle_events(&data);
-	create_game(&data);
 	mlx_loop(data.mlx);
-	// printf("no = %s\n", data.map->no);
-	// printf("so = %s\n", data.map->so);
-	// printf("we = %s\n", data.map->we);
-	// printf("ea = %s\n", data.map->ea);
-	// printf("f = %d\n", data.map->f);
-	// printf("c = %d\n", data.map->c);
-	// int	i = 0;
-	// while(data.map->map[i])
-	// {
-	// 	printf("%s\n", data.map->map[i]);
-	// 	i++;
-	// }
 	ft_free_data(&data);
 	return (0);
 }

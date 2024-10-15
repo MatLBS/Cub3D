@@ -6,7 +6,7 @@
 #    By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 21:07:58 by matle-br          #+#    #+#              #
-#    Updated: 2024/10/11 14:13:36 by matle-br         ###   ########.fr        #
+#    Updated: 2024/10/14 17:47:06 by matle-br         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ YELLOW = \033[33m
 ROUGE = \033[1;31m
 
 SRC_DIR = src/main.c src/check_input.c src/parsing_utils.c src/get_next_line.c src/free.c \
-			src/parsing_utils2.c src/check_map.c src/events.c src/init.c src/games.c \
-			src/games_utils.c
+			src/parsing_utils2.c src/check_map.c src/events.c src/init.c src/raycasting.c \
+			src/raycasting_utils.c src/images.c
 
 LIBFT_A = ./includes/libft/libft.a
 PATH_MINILIBX = /home/matle-br/sgoinfre/minilibx-linux
