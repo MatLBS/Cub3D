@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:55:55 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/14 17:47:55 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:22:17 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ void	ft_free_cub(char **tab)
 
 void	ft_free_images(t_data *data)
 {
-	(void)data;
-	//TO DO
+	if (data->tab_img[BACKGROUND].img)
+		mlx_destroy_image(data->mlx, data->tab_img[BACKGROUND].img);
+	if (data->tab_img[NORTH].img)
+		mlx_destroy_image(data->mlx, data->tab_img[NORTH].img);
+	if (data->tab_img[SOUTH].img)
+		mlx_destroy_image(data->mlx, data->tab_img[SOUTH].img);
+	if (data->tab_img[EAST].img)
+		mlx_destroy_image(data->mlx, data->tab_img[EAST].img);
+	if (data->tab_img[WEST].img)
+		mlx_destroy_image(data->mlx, data->tab_img[WEST].img);
 }
 
 void	ft_free_data(t_data *data)

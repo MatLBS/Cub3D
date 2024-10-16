@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 13:06:41 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:28:51 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define HEIGHT 800
 # define WIDTH_XPM 100
 # define HEIGHT_XPM 100
-# define MOVE_SPEED 0.2
+# define MOVE_SPEED 0.1
 
 /* ----------- Définition de mes images -------------*/
 
@@ -61,9 +61,11 @@ typedef struct s_wall
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
-	int		color;
+	long	color;
+	int		side;
 	int		width_xpm;
 	int		height_xpm;
+	char	*face;
 }	t_wall;
 
 typedef struct s_player
@@ -153,6 +155,7 @@ int			check_map(t_data *data);
 
 /* free.c */
 void		ft_free_cub(char **tab);
+void		ft_free_images(t_data *data);
 void		ft_free_data(t_data *data);
 
 /* init.c */
@@ -178,7 +181,7 @@ void		which_fov(t_data *data);
 void		which_position(t_data *data);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void		my_mlx_pixel_put_data(t_data *data, int x, int y, int color);
-int			get_texture_color(t_data *data, int texX, int texY, int texWidth);
+void		get_texture_color(t_data *data, int pixelX, int pixelY);
 
 /* images.c */
 void		generate_background(t_img *img, t_data *data);

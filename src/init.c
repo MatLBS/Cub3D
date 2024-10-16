@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:36:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 12:39:13 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:10:11 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,30 @@ t_wall	*init_wall(t_data *data)
 	wall->drawEnd = 0;
 	wall->drawStart = 0;
 	wall->color = 0;
-	wall->width_xpm = 100;
-	wall->height_xpm = 100;
+	wall->width_xpm = 0;
+	wall->height_xpm = 0;
+	wall->face = NULL;
 	return (wall);
 
 }
 
-// t_img	*init_imgs(t_data *data)
-// {
-// 	t_img	*imgs;
+void	init_imgs(t_img *tab_img)
+{
+	int	i;
 
-// 	imgs = malloc(sizeof(t_img) * 6);
-// 	if (!imgs)
-// 		return (printf("Error while allocating imgs.\n"), \
-// 			ft_free_data(data), exit(EXIT_FAILURE), NULL);
-// 	return (imgs);
-// }
+	i = 0;
+	while(i < 5)
+	{
+		tab_img[i].img = NULL;
+		tab_img[i].addr = NULL;
+		tab_img[i].bits_per_pixel = 0;
+		tab_img[i].line_length = 0;
+		tab_img[i].endian = 0;
+		tab_img[i].width = 0;
+		tab_img[i].height = 0;
+		i++;
+	}
+}
 
 void	init_data(t_data *data)
 {
@@ -98,6 +106,7 @@ void	init_data(t_data *data)
 	data->map = init_map();
 	data->player = init_player(data);
 	data->wall = init_wall(data);
+	init_imgs(data->tab_img);
 }
 
 void	init_mlx(t_data *data)

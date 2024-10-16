@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:30:47 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 13:06:07 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:56:50 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,48 @@ void	my_mlx_pixel_put_data(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// int	get_texture_color(t_data *data, int texX, int texY, int texWidth)
-// {
-// 	int	*pixels;
-// 	int	color;
+int	get_pixel_color(t_img *img, int pixelX, int pixelY, t_data *data)
+{
+	if (pixelX < 0 || pixelX >= img->width || pixelY < 0 || pixelY >= img->height)
+	{
+		// printf("Pixel out of bounds\n");
+		return (0);
+	}
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	if (!img->addr)
+	{
+		ft_free_data(data);
+		c_handler(data);
+	}
+	return (*(unsigned long *)((img->addr + (pixelY * img->line_length) + (pixelX * img->bits_per_pixel / 8))));
+}
 
-// 	pixels = (int *)mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel, &data->line_length, &data->endian);
-// 	color = pixels[texY * texWidth + texX];
-
-// 	return (color);
-// }
+void	get_texture_color(t_data *data, int pixelX, int pixelY)
+{
+	if (data->wall->side == 0)
+	{
+		if (data->player->rayDirX > 0)
+		{
+			// printf("east\n");
+			data->wall->color = get_pixel_color(&data->tab_img[EAST], pixelX, pixelY, data);
+		}
+		else
+		{
+			// printf("west\n");
+			data->wall->color = get_pixel_color(&data->tab_img[WEST], pixelX, pixelY, data);
+		}
+	}
+	else
+	{
+		if (data->player->rayDirY > 0)
+		{
+			// printf("south\n");
+			data->wall->color = get_pixel_color(&data->tab_img[SOUTH], pixelX, pixelY, data);
+		}
+		else
+		{
+			// printf("north\n");
+			data->wall->color = get_pixel_color(&data->tab_img[NORTH], pixelX, pixelY, data);
+		}
+	}
+}

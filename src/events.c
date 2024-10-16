@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:57:45 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 13:10:26 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:49:07 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,33 @@
 
 void	move_forward(t_data *data)
 {
-	data->player->posX += data->player->dirX * MOVE_SPEED;
-	data->player->posY += data->player->dirY * MOVE_SPEED;
+	int	tmpX;
+	int	tmpY;
+
+	tmpX = data->player->posX + data->player->dirX;
+	tmpY = data->player->posY + data->player->dirY;
+	if (data->map->map[tmpY][tmpX] == '1');
+	else
+	{
+		data->player->posX += data->player->dirX * MOVE_SPEED;
+		data->player->posY += data->player->dirY * MOVE_SPEED;
+	}
 	raycasting(data);
 }
 
 void	move_backwards(t_data *data)
 {
-	data->player->posX -= data->player->dirX * MOVE_SPEED;
-	data->player->posY -= data->player->dirY * MOVE_SPEED;
+	int	tmpX;
+	int	tmpY;
+
+	tmpX = data->player->posX - (data->player->dirX * MOVE_SPEED);
+	tmpY = data->player->posY - (data->player->dirY * MOVE_SPEED);
+	if (data->map->map[tmpY][tmpX] == '1');
+	else
+	{
+		data->player->posX -= data->player->dirX * MOVE_SPEED;
+		data->player->posY -= data->player->dirY * MOVE_SPEED;
+	}
 	raycasting(data);
 }
 

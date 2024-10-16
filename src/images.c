@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:27:01 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 12:51:23 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:14:13 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	create_img(t_img *img, t_data *data, char *pathfile)
 	if (!img->img)
 	{
 		printf("Error while loading an image.\n");
+		ft_free_data(data);
 		c_handler(data);
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);

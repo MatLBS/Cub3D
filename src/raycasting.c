@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:07:12 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 13:06:19 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:41:18 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	algo_dda_suite(t_data *data)
 {
 	int	hit;
-	int	side;
 
 	hit = 0;
 	while (hit == 0)
@@ -24,18 +23,18 @@ void	algo_dda_suite(t_data *data)
 		{
 			data->player->sideDistX += data->player->deltaDistX;
 			data->player->mapX += data->player->stepX;
-			side = 0;
+			data->wall->side = 0;
 		}
 		else
 		{
 			data->player->sideDistY += data->player->deltaDistY;
 			data->player->mapY += data->player->stepY;
-			side = 1;
+			data->wall->side = 1;
 		}
 		if (data->map->map[data->player->mapY][data->player->mapX] == '1')
 			hit = 1;
 	}
-	if (side == 0)
+	if (data->wall->side == 0)
 		data->wall->perpWallDist = (data->player->sideDistX - data->player->deltaDistX);
 	else
 		data->wall->perpWallDist = (data->player->sideDistY - data->player->deltaDistY);
@@ -81,8 +80,10 @@ void	display_wall(t_data *data, int x)
 		data->wall->drawEnd = data->height - 1;
 	while (data->wall->drawStart < data->wall->drawEnd)
 	{
-		// data->wall->color = get_texture_color(data, (int)data->player->cameraX, data->wall->drawStart, data->wall->width_xpm);
-		my_mlx_pixel_put_data(data, x, data->wall->drawStart, 16711935);
+		get_texture_color(data, x, data->wall->drawStart);
+		// printf("%ld\n", data->wall->color);
+		// printf("bonjour\n");
+		my_mlx_pixel_put_data(data, x, data->wall->drawStart, data->wall->color);
 		data->wall->drawStart++;
 	}
 }
