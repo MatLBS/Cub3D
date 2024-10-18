@@ -6,11 +6,11 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:55:55 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 15:22:17 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:20:07 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	ft_free_cub(char **tab)
 {

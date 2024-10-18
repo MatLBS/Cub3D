@@ -6,78 +6,70 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:57:45 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 15:49:07 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:21:38 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	move_forward(t_data *data)
 {
-	int	tmpX;
-	int	tmpY;
+	int	tmpx;
+	int	tmpy;
 
-	tmpX = data->player->posX + data->player->dirX;
-	tmpY = data->player->posY + data->player->dirY;
-	if (data->map->map[tmpY][tmpX] == '1');
-	else
+	tmpx = data->player->posx + data->player->dirx;
+	tmpy = data->player->posy + data->player->diry;
+	if (data->map->map[tmpy][tmpx] != '1')
 	{
-		data->player->posX += data->player->dirX * MOVE_SPEED;
-		data->player->posY += data->player->dirY * MOVE_SPEED;
+		data->player->posx += data->player->dirx * MOVE_SPEED;
+		data->player->posy += data->player->diry * MOVE_SPEED;
 	}
 	raycasting(data);
 }
 
 void	move_backwards(t_data *data)
 {
-	int	tmpX;
-	int	tmpY;
+	int	tmpx;
+	int	tmpy;
 
-	tmpX = data->player->posX - (data->player->dirX * MOVE_SPEED);
-	tmpY = data->player->posY - (data->player->dirY * MOVE_SPEED);
-	if (data->map->map[tmpY][tmpX] == '1');
-	else
+	tmpx = data->player->posx - (data->player->dirx * MOVE_SPEED);
+	tmpy = data->player->posy - (data->player->diry * MOVE_SPEED);
+	if (data->map->map[tmpy][tmpx] != '1')
 	{
-		data->player->posX -= data->player->dirX * MOVE_SPEED;
-		data->player->posY -= data->player->dirY * MOVE_SPEED;
+		data->player->posx -= data->player->dirx * MOVE_SPEED;
+		data->player->posy -= data->player->diry * MOVE_SPEED;
 	}
 	raycasting(data);
 }
 
 void	move_left(t_data *data)
 {
-	if (data->map->pos_player == 'N')
-		data->player->posX -= 0.2;
-	else if (data->map->pos_player == 'S')
-		data->player->posX -= 0.2;
-	else if (data->map->pos_player == 'E')
-		data->player->posY -= 0.2;
-	else
-		data->player->posY -= 0.2;
+	int	tmpx;
+	int	tmpy;
+
+	tmpx = data->player->posx - data->player->planex * MOVE_SPEED;
+	tmpy = data->player->posy - data->player->planey * MOVE_SPEED;
+	if (data->map->map[tmpy][tmpx] != '1')
+	{
+		data->player->posx -= data->player->planex * MOVE_SPEED;
+		data->player->posy -= data->player->planey * MOVE_SPEED;
+	}
 	raycasting(data);
 }
 
 void	move_right(t_data *data)
 {
-	if (data->map->pos_player == 'N')
-		data->player->posX += 0.2;
-	else if (data->map->pos_player == 'S')
-		data->player->posX += 0.2;
-	else if (data->map->pos_player == 'E')
-		data->player->posY += 0.2;
-	else
-		data->player->posY += 0.2;
-	raycasting(data);
-}
+	int	tmpx;
+	int	tmpy;
 
-int	c_handler(t_data *data)
-{
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	exit(EXIT_FAILURE);
-	return (0);
+	tmpx = data->player->posx + data->player->planex * MOVE_SPEED;
+	tmpy = data->player->posy + data->player->planey * MOVE_SPEED;
+	if (data->map->map[tmpy][tmpx] != '1')
+	{
+		data->player->posx += data->player->planex * MOVE_SPEED;
+		data->player->posy += data->player->planey * MOVE_SPEED;
+	}
+	raycasting(data);
 }
 
 int	key_handler(int key, t_data *data)
@@ -92,6 +84,10 @@ int	key_handler(int key, t_data *data)
 		move_right(data);
 	else if (key == XK_s)
 		move_backwards(data);
+	else if (key == 65361)
+		turn_left(data);
+	else if (key == 65363)
+		turn_right(data);
 	return (0);
 }
 

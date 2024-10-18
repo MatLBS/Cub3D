@@ -6,11 +6,11 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:59:36 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/10 17:32:40 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:12:48 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	check_sides(char *str, t_data *data)
 {
@@ -80,29 +80,4 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 		free(ptr);
 	}
 	return (temp);
-}
-
-int	check_rgb_suite(char **tab, t_data *data, char *new_str)
-{
-	int	nb1;
-	int	nb2;
-	int	nb3;
-	int	i;
-
-	i = -1;
-	while (tab[++i])
-	{
-		if (ft_atoi(tab[i]) > 255 || ft_atoi(tab[i]) < 0)
-		{
-			printf("Invalid RGB input. RGB must contain numbers between 0 and 255.\n");
-			free(new_str);
-			ft_free_data(data);
-			return (get_next_line(data->fd, 1), exit(EXIT_FAILURE), 0);
-		}
-	}
-	nb1 = ft_atoi(tab[0]);
-	nb2 = ft_atoi(tab[1]);
-	nb3 = ft_atoi(tab[2]);
-	ft_free_cub(tab);
-	return ((nb1 << 16) + (nb2 << 8) + nb3);
 }

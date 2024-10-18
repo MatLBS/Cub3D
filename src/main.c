@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:27:53 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/15 12:42:08 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:22:25 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	main(int ac, char **av)
 	check_input(av, &data);
 	init_mlx(&data);
 	create_imgs(&data);
+	which_position(&data);
 	raycasting(&data);
 	handle_events(&data);
 	mlx_loop(data.mlx);
-	ft_free_data(&data);
 	return (0);
 }

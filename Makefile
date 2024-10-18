@@ -6,7 +6,7 @@
 #    By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 21:07:58 by matle-br          #+#    #+#              #
-#    Updated: 2024/10/14 17:47:06 by matle-br         ###   ########.fr        #
+#    Updated: 2024/10/18 11:22:15 by matle-br         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,27 +19,39 @@ GREEN = \033[32m
 YELLOW = \033[33m
 ROUGE = \033[1;31m
 
-SRC_DIR = src/main.c src/check_input.c src/parsing_utils.c src/get_next_line.c src/free.c \
-			src/parsing_utils2.c src/check_map.c src/events.c src/init.c src/raycasting.c \
-			src/raycasting_utils.c src/images.c
+SRC_DIR =	src/main.c \
+			src/events/events.c \
+			src/events/events2.c \
+			src/init/init.c \
+			src/init/init2.c \
+			src/other/free.c \
+			src/other/get_next_line.c \
+			src/other/images.c \
+			src/parsing/check_input.c \
+			src/parsing/check_map.c \
+			src/parsing/parsing_utils.c \
+			src/parsing/parsing_utils2.c \
+			src/raycasting/raycasting_utils.c \
+			src/raycasting/raycasting_utils2.c \
+			src/raycasting/raycasting.c \
 
 LIBFT_A = ./includes/libft/libft.a
 PATH_MINILIBX = /home/matle-br/sgoinfre/minilibx-linux
 
 RM = rm -f
-OBJ_DIR = obj_dir
-OBJ = $(SRC_DIR:src/%.c=$(OBJ_DIR)/%.o)
+# OBJ_DIR = obj_dir
+# OBJ = $(SRC_DIR:src/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
-$(NAME) : $(LIBFT_A) $(SRC_DIR) $(OBJ)
+$(NAME) : $(LIBFT_A) $(SRC_DIR)
 		@$(CC) $(SRC_DIR) $(LIBFT_A) $(FLAGS) $(MLX_FLAGS) -o $(NAME)
 		@echo "$(YELLOW)Creating the objects..."
 		@echo "$(GREEN)$(NAME) has compiled !"
 
-$(OBJ_DIR)/%.o: src/%.c
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(FLAGS) -I$(PATH_MINILIBX) -c $< -o $@
+# $(OBJ_DIR)/%.o: src/%.c
+# 	@mkdir -p $(OBJ_DIR)
+# 	@$(CC) $(FLAGS) -I$(PATH_MINILIBX) -c $< -o $@
 
 $(LIBFT_A) :
 	@echo "$(YELLOW)Libft is compiling..."

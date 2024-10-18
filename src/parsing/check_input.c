@@ -6,11 +6,11 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:02:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/10 16:52:55 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:20:17 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	check_av1(char	**av, t_data *data)
 {

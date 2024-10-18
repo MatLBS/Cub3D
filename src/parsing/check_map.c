@@ -6,17 +6,14 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:32:15 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/14 14:41:16 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:32:57 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	check_space(t_data *data, char **tab, int i)
+int	check_space(t_data *data, char **tab, int i, int j)
 {
-	int	j;
-
-	j = -1;
 	while (tab[i][++j])
 	{
 		if (tab[i][j] == ' ')
@@ -26,6 +23,14 @@ int	check_space(t_data *data, char **tab, int i)
 				(tab[i][j + 1] != '1' && tab[i][j + 1] != ' ') || \
 				(tab[i - 1][j] != '1' && tab[i - 1][j] != ' ') || \
 				(tab[i + 1][j] != '1' && tab[i + 1][j] != ' ')))
+			{
+				printf("Error : Map not closedddddd.\n");
+				return (ft_free_data(data), exit(EXIT_FAILURE), 0);
+			}
+		}
+		if (tab[i][j] == '0')
+		{
+			if (tab[i][j - 1] == '\0' || tab[i][j + 1] == '\0' || tab[i - 1][j] == '\0' || tab[i + 1][j] == '\0')
 			{
 				printf("Error : Map not closed.\n");
 				return (ft_free_data(data), exit(EXIT_FAILURE), 0);
@@ -43,8 +48,7 @@ int	check_line(char *str, t_data *data, int y)
 	if (str[0] == '\0')
 	{
 		printf("Error : Empty line in the map.\n");
-		ft_free_data(data);
-		return (exit(EXIT_FAILURE), 0);
+		return (ft_free_data(data), exit(EXIT_FAILURE), 0);
 	}
 	while (str[++i])
 	{
@@ -52,14 +56,13 @@ int	check_line(char *str, t_data *data, int y)
 		&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W')
 		{
 			printf("Error : Bad input in the map.\n");
-			ft_free_data(data);
-			return (exit(EXIT_FAILURE), 0);
+			return (ft_free_data(data), exit(EXIT_FAILURE), 0);
 		}
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
 		{
 			data->map->player += 1;
-			data->player->posX = i;
-			data->player->posY = y;
+			data->player->posx = i;
+			data->player->posy = y;
 			data->map->pos_player = str[i];
 		}
 	}
@@ -80,10 +83,10 @@ int	check_first_line(char **tab, t_data *data, int i)
 		}
 		if (tab[i][j] == ' ')
 		{
-			if (i > 0 && (tab[i][i + 1] != '\0') && \
-				((tab[i][i - 1] != '1' && tab[i][i - 1] != ' ') || \
-				(tab[i][i + 1] != '1' && tab[i][i + 1] != ' ') || \
-				(tab[1][j] != '1' && tab[1][j] != ' ')))
+			if (j > 0 && (tab[i][j + 1] != '\0') && ((tab[i][j - 1] \
+				!= '1' && tab[i][j - 1] != ' ') || \
+				(tab[i][j + 1] != '1' && tab[i][j + 1] != ' ') || \
+				(tab[i + 1][j] != '1' && tab[i + 1][j] != ' ')))
 			{
 				printf("Error : Map not closed on first line.\n");
 				return (ft_free_data(data), exit(EXIT_FAILURE), 0);
@@ -98,8 +101,8 @@ int	check_last_line(char **tab, t_data *data, int i)
 {
 	int	j;
 
-	j = 0;
-	while (tab[i][j])
+	j = -1;
+	while (tab[i][++j])
 	{
 		if (tab[i][j] != '1' && tab[i][j] != ' ')
 		{
@@ -119,7 +122,6 @@ int	check_last_line(char **tab, t_data *data, int i)
 				return (exit(EXIT_FAILURE), 0);
 			}
 		}
-		j++;
 	}
 	return (1);
 }
@@ -137,7 +139,7 @@ int	check_map(t_data *data)
 	{
 		check_line(data->map->map[i], data, i);
 		check_sides(data->map->map[i], data);
-		check_space(data, data->map->map, i);
+		check_space(data, data->map->map, i, -1);
 		i++;
 	}
 	check_last_line(data->map->map, data, i);
