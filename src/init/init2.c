@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:50:57 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/18 11:20:03 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:11:00 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_map	*init_map(void)
 	map->we = NULL;
 	map->ea = NULL;
 	map->map = NULL;
+	map->cpy_map = NULL;
 	map->pos_player = 0;
 	map->player = 0;
 	map->f = 0;

@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:07:12 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/18 11:20:37 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:01:29 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@ void	algo_dda_suite(t_data *data, int hit)
 			data->wall->side = 1;
 		}
 		if (data->map->map[data->player->mapy][data->player->mapx] == '1')
+		{
 			hit = 1;
+			data->wall->hit_door = 0;
+		}
+		if (data->map->map[data->player->mapy][data->player->mapx] == 'D')
+		{
+			hit = 1;
+			data->wall->hit_door = 1;
+		}
 	}
 	if (data->wall->side == 0)
 		data->wall->perpwalldist = (data->player->sidedistx - \
@@ -101,6 +109,7 @@ void	launch_rays(t_data *data)
 		display_wall(data, x);
 		x++;
 	}
+	// create_minimap(data);
 }
 
 void	raycasting(t_data *data)

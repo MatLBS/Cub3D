@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:30:47 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/18 11:20:30 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:55:16 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,40 @@ void	my_mlx_pixel_put_data(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	create_minimap(t_data *data)
+{
+	int	x;
+	int	y;
+	// int	new_posx;
+	// int	new_posy;
+
+	// new_posx = data->player->posx - 5;
+	// new_posy = data->player->posy - 5;
+	y = 200;
+	while (y < 400)
+	{
+		x = 100;
+		while (x < 350)
+		{
+			if (data->map->map[y / (int)data->player->posy][x / (int)data->player->posx] == '0')
+			{
+				// printf("blanc\n");
+				my_mlx_pixel_put_data(data, x, y, 16777215);
+			}
+			else if (data->map->map[y / (int)data->player->posy][x / (int)data->player->posx] == '1')
+			{
+				// printf("rouge\n");
+				my_mlx_pixel_put_data(data, x, y, 16711680);
+			}
+			else
+			{
+				// printf("rose\n");
+				my_mlx_pixel_put_data(data, x, y, 16761035);
+			}
+			x++;
+		}
+		y++;
+	}
 }

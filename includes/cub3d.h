@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/18 14:14:57 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:34:21 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define SOUTH 2
 # define EAST 3
 # define WEST 4
+# define DOOR 5
+# define DOOR_1 6
 
 /*---------------------------------------------------*/
 
@@ -54,6 +56,7 @@ typedef struct s_map
 	char	pos_player;
 	int		player;
 	char	**map;
+	char	**cpy_map;
 }	t_map;
 
 typedef struct s_wall
@@ -67,6 +70,7 @@ typedef struct s_wall
 	int		width_xpm;
 	int		height_xpm;
 	int		face;
+	int		hit_door;
 }	t_wall;
 
 typedef struct s_player
@@ -88,6 +92,10 @@ typedef struct s_player
 	double	camerax;
 	double	raydirx;
 	double	raydiry;
+	int		texx;
+	int		texy;
+	double	wallx;
+	double	texpos;
 }	t_player;
 
 typedef struct s_img
@@ -117,7 +125,7 @@ typedef struct s_data
 	t_player	*player;
 	t_map		*map;
 	t_wall		*wall;
-	t_img		tab_img[5];
+	t_img		tab_img[7];
 }	t_data;
 
 /* events.c */
@@ -197,6 +205,7 @@ void		which_fov(t_data *data);
 void		which_position(t_data *data);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void		my_mlx_pixel_put_data(t_data *data, int x, int y, int color);
+void		create_minimap(t_data *data);
 
 /* raycasting_utils2.c */
 int			get_pixel_color(t_img *img, int pixelX, int pixelY, t_data *data);

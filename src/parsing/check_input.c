@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:02:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/18 11:20:17 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:12:09 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,26 @@ void	check_av1(char	**av, t_data *data)
 
 	str = ft_strrchr(av[1], '.');
 	if (ft_strncmp(str, ".cub", 4) != 0)
-		return (printf("Error : The input file is not a .cub\n"), ft_free_data(data), exit(EXIT_FAILURE));
+		return (printf("Error : The input file is not a .cub\n"), \
+			ft_free_data(data), exit(EXIT_FAILURE));
 	fd = open(av[1], __O_DIRECTORY);
 	if (fd >= 0)
-		return (printf("Error : The input file must not be a directory.\n"), ft_free_data(data), exit(EXIT_FAILURE));
+		return (printf("Error : The input file must not be a directory.\n"), \
+			ft_free_data(data), exit(EXIT_FAILURE));
 }
 
 void	parse_map(t_data *data)
 {
 	static int	i;
 
-	data->map->map = ft_realloc(data->map->map, sizeof(char *) * i, sizeof(char *) * (i + 2));
+	data->map->map = ft_realloc(data->map->map, sizeof(char *) * i, \
+		sizeof(char *) * (i + 2));
 	data->map->map[i] = ft_strdup(data->str);
 	data->map->map[i + 1] = NULL;
+	data->map->cpy_map = ft_realloc(data->map->cpy_map, sizeof(char *) * i, \
+		sizeof(char *) * (i + 2));
+	data->map->cpy_map[i] = ft_strdup(data->str);
+	data->map->cpy_map[i + 1] = NULL;
 	i++;
 }
 
@@ -40,7 +47,7 @@ void	parse_args(t_data *data)
 	int		i;
 
 	if (data->str[0] == '\0')
-		return;
+		return ;
 	i = ft_isspace(data->str);
 	if (data->str[i] == 'N' && data->str[i + 1] == 'O' && !data->map->no)
 		data->map->no = check_xpm(data, i);
@@ -80,7 +87,8 @@ int	check_input(char **av, t_data *data)
 	check_av1(av, data);
 	data->fd = open(av[1], O_RDONLY);
 	if (data->fd == -1)
-		return (printf("Error while opening the file !\n"), ft_free_data(data), exit(EXIT_FAILURE), 0);
+		return (printf("Error while opening the file !\n"), \
+			ft_free_data(data), exit(EXIT_FAILURE), 0);
 	while (1)
 	{
 		data->str = get_next_line(data->fd, 0);

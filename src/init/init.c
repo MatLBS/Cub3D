@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:36:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/18 11:19:56 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/19 13:29:48 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_wall	*init_wall(t_data *data)
 	wall->width_xpm = 0;
 	wall->height_xpm = 0;
 	wall->face = -1;
+	wall->hit_door = -1;
 	return (wall);
 }
 
