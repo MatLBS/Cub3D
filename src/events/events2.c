@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:48:58 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/18 11:19:52 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:31:01 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,22 @@ int	c_handler(t_data *data)
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	exit(EXIT_FAILURE);
+	return (0);
+}
+
+int	handle_mouse(int x, int y, t_data *data)
+{
+	double	olddirx;
+	double	oldplanex;
+
+	if (data->mouse == 0)
+		return (0);
+	olddirx = data->player->dirx;
+	data->player->dirx = data->player->dirx * cos(x) - data->player->diry * sin(y);
+	data->player->diry = olddirx * sin(y) + data->player->diry * cos(x);
+	oldplanex = data->player->planex;
+	data->player->planex = data->player->planex * cos(x) - data->player->planey * sin(y);
+	data->player->planey = oldplanex * sin(y) + data->player->planey * cos(x);
+	raycasting(data);
 	return (0);
 }

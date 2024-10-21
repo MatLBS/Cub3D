@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:27:53 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 14:14:08 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:22:45 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	handle_events(t_data *data)
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, c_handler, data);
 	// mlx_loop_hook(data->mlx, check_keys, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, key_handler, data);
+	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse, data);
 }
 
 int	main(int ac, char **av)

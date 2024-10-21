@@ -6,11 +6,39 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:55:31 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 15:32:28 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:18:55 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void	handle_door(t_data *data)
+{
+	if (data->wall->side == 0)
+	{
+		if (data->player->raydirx > 0)
+			data->wall->face = DOOR_1;
+		else
+			data->wall->face = DOOR_1;
+	}
+	else
+	{
+		if (data->player->raydiry > 0)
+			data->wall->face = DOOR;
+		else
+			data->wall->face = DOOR_1;
+	}
+}
+
+int	size_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
 
 int	get_pixel_color(t_img *img, int pixelX, int pixelY, t_data *data)
 {
@@ -61,24 +89,6 @@ void	get_texture_color_suite(t_data *data, int pixelX, int y)
 			data->player->texx, data->player->texy, data);
 		my_mlx_pixel_put_data(data, pixelX, y, data->wall->color);
 		y++;
-	}
-}
-
-static void	handle_door(t_data *data)
-{
-	if (data->wall->side == 0)
-	{
-		if (data->player->raydirx > 0)
-			data->wall->face = DOOR_1;
-		else
-			data->wall->face = DOOR_1;
-	}
-	else
-	{
-		if (data->player->raydiry > 0)
-			data->wall->face = DOOR;
-		else
-			data->wall->face = DOOR_1;
 	}
 }
 

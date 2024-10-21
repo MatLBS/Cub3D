@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:27:01 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 15:29:55 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:59:45 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void	create_imgs(t_data *data)
 	create_img(&data->tab_img[WEST], data, data->map->we);
 	create_img(&data->tab_img[DOOR], data, "textures/horror/door.xpm");
 	create_img(&data->tab_img[DOOR_1], data, "textures/horror/other_door.xpm");
+	create_img(&data->tab_img[PICTO_W], data, "textures/horror/picto_wall.xpm");
+	create_img(&data->tab_img[PICTO_D], data, "textures/horror/picto_door.xpm");
 	generate_background(&data->tab_img[BACKGROUND], data);
 }

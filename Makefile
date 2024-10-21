@@ -6,14 +6,14 @@
 #    By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 21:07:58 by matle-br          #+#    #+#              #
-#    Updated: 2024/10/18 11:22:15 by matle-br         ###   ########.fr        #
+#    Updated: 2024/10/21 16:35:49 by matle-br         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Cub3D
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror -O3 -mtune=native -flto
 MLX_FLAGS = -L$(PATH_MINILIBX) -lmlx -lX11 -lXext -lm -lz
 GREEN = \033[32m
 YELLOW = \033[33m
@@ -34,6 +34,7 @@ SRC_DIR =	src/main.c \
 			src/raycasting/raycasting_utils.c \
 			src/raycasting/raycasting_utils2.c \
 			src/raycasting/raycasting.c \
+			src/raycasting/minimap.c \
 
 LIBFT_A = ./includes/libft/libft.a
 PATH_MINILIBX = /home/matle-br/sgoinfre/minilibx-linux

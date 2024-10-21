@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:32:15 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 13:17:41 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:43:13 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	check_line(char *str, t_data *data, int y)
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
 		{
 			data->map->player += 1;
-			data->player->posx = i;
-			data->player->posy = y;
+			data->player->posx = i + 0.5;
+			data->player->posy = y + 0.5;
 			data->map->pos_player = str[i];
 		}
 	}

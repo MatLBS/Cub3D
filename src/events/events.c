@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:57:45 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 16:13:05 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:24:48 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	move_forward(t_data *data)
 
 	tmpx = data->player->posx + data->player->dirx * MOVE_SPEED * 2;
 	tmpy = data->player->posy + data->player->diry * MOVE_SPEED * 2;
-	if (data->map->map[tmpy][tmpx] != '1' && data->map->map[tmpy][tmpx] != 'D')
-	{
-		data->player->posx += data->player->dirx * MOVE_SPEED;
+	if (data->map->map[tmpy][(int)data->player->posx] != '1' && \
+		data->map->map[tmpy][(int)data->player->posx] != 'D')
 		data->player->posy += data->player->diry * MOVE_SPEED;
-	}
+	if (data->map->map[(int)data->player->posy][tmpx] != '1' && \
+		data->map->map[(int)data->player->posy][tmpx] != 'D')
+		data->player->posx += data->player->dirx * MOVE_SPEED;
 	raycasting(data);
 }
 
@@ -34,11 +35,12 @@ void	move_backwards(t_data *data)
 
 	tmpx = data->player->posx - data->player->dirx * MOVE_SPEED * 2;
 	tmpy = data->player->posy - data->player->diry * MOVE_SPEED * 2;
-	if (data->map->map[tmpy][tmpx] != '1' && data->map->map[tmpy][tmpx] != 'D')
-	{
-		data->player->posx -= data->player->dirx * MOVE_SPEED;
+	if (data->map->map[tmpy][(int)data->player->posx] != '1' && \
+		data->map->map[tmpy][(int)data->player->posx] != 'D')
 		data->player->posy -= data->player->diry * MOVE_SPEED;
-	}
+	if (data->map->map[(int)data->player->posy][tmpx] != '1' && \
+		data->map->map[(int)data->player->posy][tmpx] != 'D')
+		data->player->posx -= data->player->dirx * MOVE_SPEED;
 	raycasting(data);
 }
 
@@ -49,11 +51,12 @@ void	move_left(t_data *data)
 
 	tmpx = data->player->posx - data->player->planex * MOVE_SPEED * 2;
 	tmpy = data->player->posy - data->player->planey * MOVE_SPEED * 2;
-	if (data->map->map[tmpy][tmpx] != '1' && data->map->map[tmpy][tmpx] != 'D')
-	{
-		data->player->posx -= data->player->planex * MOVE_SPEED;
+	if (data->map->map[tmpy][(int)data->player->posx] != '1' && \
+		data->map->map[tmpy][(int)data->player->posx] != 'D')
 		data->player->posy -= data->player->planey * MOVE_SPEED;
-	}
+	if (data->map->map[(int)data->player->posy][tmpx] != '1' && \
+		data->map->map[(int)data->player->posy][tmpx] != 'D')
+		data->player->posx -= data->player->planex * MOVE_SPEED;
 	raycasting(data);
 }
 
@@ -64,11 +67,12 @@ void	move_right(t_data *data)
 
 	tmpx = data->player->posx + data->player->planex * MOVE_SPEED * 2;
 	tmpy = data->player->posy + data->player->planey * MOVE_SPEED * 2;
-	if (data->map->map[tmpy][tmpx] != '1' && data->map->map[tmpy][tmpx] != 'D')
-	{
-		data->player->posx += data->player->planex * MOVE_SPEED;
+	if (data->map->map[tmpy][(int)data->player->posx] != '1' && \
+		data->map->map[tmpy][(int)data->player->posx] != 'D')
 		data->player->posy += data->player->planey * MOVE_SPEED;
-	}
+	if (data->map->map[(int)data->player->posy][tmpx] != '1' && \
+		data->map->map[(int)data->player->posy][tmpx] != 'D')
+		data->player->posx += data->player->planex * MOVE_SPEED;
 	raycasting(data);
 }
 
@@ -81,7 +85,8 @@ static void	handle_door(t_data *data)
 	tmpy = data->player->posy + data->player->diry;
 	if (data->map->map[tmpy][tmpx] == 'D')
 		data->map->map[tmpy][tmpx] = '0';
-	else if (data->map->cpy_map[tmpy][tmpx] == 'D' && data->map->map[tmpy][tmpx] == '0')
+	else if (data->map->cpy_map[tmpy][tmpx] == 'D' && \
+		data->map->map[tmpy][tmpx] == '0')
 		data->map->map[tmpy][tmpx] = 'D';
 	raycasting(data);
 }
@@ -104,6 +109,10 @@ int	key_handler(int key, t_data *data)
 		turn_right(data);
 	else if (key == XK_e)
 		handle_door(data);
+	else if (key == 65507 && data->mouse == 0)
+		data->mouse = 1;
+	else if (key == 65507 && data->mouse == 1)
+		data->mouse = 0;
 	return (0);
 }
 

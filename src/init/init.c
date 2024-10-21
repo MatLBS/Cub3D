@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:36:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 13:29:48 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:55:46 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_imgs(t_img *tab_img)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 8)
 	{
 		tab_img[i].img = NULL;
 		tab_img[i].addr = NULL;
@@ -55,6 +55,7 @@ void	init_data(t_data *data)
 	data->str = NULL;
 	data->width = 0;
 	data->height = 0;
+	data->mouse = 0;
 	data->map = init_map();
 	data->player = init_player(data);
 	data->wall = init_wall(data);

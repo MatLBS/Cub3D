@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:07:12 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 17:01:29 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:08:59 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	launch_rays(t_data *data)
 		display_wall(data, x);
 		x++;
 	}
-	// create_minimap(data);
+	create_minimap(data);
 }
 
 void	raycasting(t_data *data)

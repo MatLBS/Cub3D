@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 16:34:21 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:22:22 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define HEIGHT_XPM 100
 # define MOVE_SPEED 0.1
 # define TURN_SPEED 0.05
+# define SIZE_SQUARE 20
+# define WIDTH_MINIMAP 300
+# define HEIGHT_MINIMAP 200
 
 /* ----------- Définition de mes images -------------*/
 
@@ -41,6 +44,8 @@
 # define WEST 4
 # define DOOR 5
 # define DOOR_1 6
+# define PICTO_W 7
+# define PICTO_D 8
 
 /*---------------------------------------------------*/
 
@@ -122,10 +127,11 @@ typedef struct s_data
 	char		*str;
 	int			width;
 	int			height;
+	int			mouse;
 	t_player	*player;
 	t_map		*map;
 	t_wall		*wall;
-	t_img		tab_img[7];
+	t_img		tab_img[9];
 }	t_data;
 
 /* events.c */
@@ -139,6 +145,7 @@ int			key_handler(int key, t_data *data);
 void		turn_left(t_data *data);
 void		turn_right(t_data *data);
 int			c_handler(t_data *data);
+int			handle_mouse(int x, int y, t_data *data);
 
 /* init.c */
 t_wall		*init_wall(t_data *data);
@@ -200,6 +207,10 @@ void		display_wall(t_data *data, int x);
 void		launch_rays(t_data *data);
 void		raycasting(t_data *data);
 
+/* minimap.c */
+void		find_pixel(t_data *data, int x, int y);
+void		create_minimap(t_data *data);
+
 /* raycasting_utils.c */
 void		which_fov(t_data *data);
 void		which_position(t_data *data);
@@ -210,6 +221,7 @@ void		create_minimap(t_data *data);
 /* raycasting_utils2.c */
 int			get_pixel_color(t_img *img, int pixelX, int pixelY, t_data *data);
 void		get_texture_color(t_data *data, int pixelX);
+int			size_tab(char **tab);
 
 
 #endif
