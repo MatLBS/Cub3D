@@ -6,11 +6,23 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:36:17 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 17:55:46 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:11:25 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+long	get_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+	{
+		printf("Error with gettimeofday");
+		return (-1);
+	}
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
 
 t_wall	*init_wall(t_data *data)
 {
@@ -50,15 +62,34 @@ void	init_imgs(t_img *tab_img)
 	}
 }
 
+t_keys	*init_keys(t_data *data)
+{
+	t_keys	*keys;
+
+	keys = malloc(sizeof(t_keys));
+	if (!keys)
+		return (printf("Error while allocating keys.\n"), \
+			ft_free_data(data), exit(EXIT_FAILURE), NULL);
+	keys->key_a = 0;
+	keys->key_d = 0;
+	keys->key_s = 0;
+	keys->key_w = 0;
+	keys->left_arrow = 0;
+	keys->right_arrow = 0;
+	return (keys);
+}
+
 void	init_data(t_data *data)
 {
 	data->str = NULL;
 	data->width = 0;
 	data->height = 0;
 	data->mouse = 0;
+	data->first_action = get_time();
 	data->map = init_map();
 	data->player = init_player(data);
 	data->wall = init_wall(data);
+	data->keys = init_keys(data);
 	init_imgs(data->tab_img);
 }
 

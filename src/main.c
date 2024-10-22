@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:27:53 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 18:22:45 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:11:08 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	handle_events(t_data *data)
 {
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, c_handler, data);
-	// mlx_loop_hook(data->mlx, check_keys, data);
-	mlx_hook(data->win, KeyPress, KeyPressMask, key_handler, data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, key_starter, data);
+	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_closer, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse, data);
+	mlx_loop_hook(data->mlx, check_keys, data);
 }
 
 int	main(int ac, char **av)
@@ -31,7 +32,6 @@ int	main(int ac, char **av)
 	init_mlx(&data);
 	create_imgs(&data);
 	which_position(&data);
-	raycasting(&data);
 	handle_events(&data);
 	mlx_loop(data.mlx);
 	return (0);

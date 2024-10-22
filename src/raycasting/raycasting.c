@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:07:12 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 12:08:59 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:16:43 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,22 @@ void	launch_rays(t_data *data)
 
 void	raycasting(t_data *data)
 {
+	long	nb;
 	ft_memcpy(data->addr, data->tab_img[BACKGROUND].addr, \
 		data->width * data->height * (data->bits_per_pixel / 8));
 	launch_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	nb = get_time();
+	// printf("nb = %ld\n", nb);
+	// printf("first_action = %ld\n", data->first_action);
+	if (nb - data->first_action < 20000)
+	{
+		mlx_string_put(data->mlx, data->win, 1400, 80, 4266955, FIRST_SENTENCE);
+		mlx_string_put(data->mlx, data->win, 1400, 100, 4266955, SECOND_SENTENCE);
+		mlx_string_put(data->mlx, data->win, 1400, 120, 4266955, THIRD_SENTENCE);
+		mlx_string_put(data->mlx, data->win, 1400, 140, 4266955, FOURTH_SENTENCE);
+		mlx_string_put(data->mlx, data->win, 1400, 160, 4266955, FIFTH_SENTENCE);
+		mlx_string_put(data->mlx, data->win, 1400, 180, 4266955, SIXTH_SENTENCE);
+		mlx_string_put(data->mlx, data->win, 1400, 200, 4266955, SEVENTH_SENTENCE);
+	}
 }

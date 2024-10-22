@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:17:16 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 16:52:41 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:19:24 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	find_pixel(t_data *data, int x, int y)
 	new_y = (y - new_posy) / SIZE_SQUARE + data->player->posy;
 	if (new_x < 0 || new_y < 0 || new_y >= size_tab(data->map->map) || new_x > (int)ft_strlen(data->map->map[(int)new_y]))
 		my_mlx_pixel_put_data(data, x + 100, y + 700, 16777215);
+	// else if (x == 0 || x == 300 || y == 0 || y == 200)
+	// 	my_mlx_pixel_put_data(data, x + 100, y + 700, 000000);
 	else if ((x >= 145 && x <= 155) && (y >= 95 && y <= 105))
 		my_mlx_pixel_put_data(data, x + 100, y + 700, 4266955);
 	else if (data->map->map[(int)new_y][(int)new_x] == '1')

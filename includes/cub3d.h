@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 18:22:22 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:12:32 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <sys/time.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -29,11 +30,27 @@
 # define HEIGHT 800
 # define WIDTH_XPM 100
 # define HEIGHT_XPM 100
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 0.05
 # define TURN_SPEED 0.05
 # define SIZE_SQUARE 20
 # define WIDTH_MINIMAP 300
 # define HEIGHT_MINIMAP 200
+# define MOUSE_SENSI 75.0
+
+# define FIRST_SENTENCE "Welcome, this is a manual on how you can play \
+with the keyboard!"
+
+# define SECOND_SENTENCE "1 -> First, you can use the W, S, A and D to move the player."
+
+# define THIRD_SENTENCE "2 -> Then, you can use the two arrows <- | -> to move your point of view."
+
+# define FOURTH_SENTENCE "3 -> You can press the buuton 'e' near a door to open/close it."
+
+# define FIFTH_SENTENCE "4 -> You can press 'Ctrl' to move your point of view with the mouse."
+
+# define SIXTH_SENTENCE "5 -> Press again 'Ctrl' to disable this feature."
+
+# define SEVENTH_SENTENCE "Have fun !"
 
 /* ----------- Définition de mes images -------------*/
 
@@ -114,6 +131,16 @@ typedef struct s_img
 	int			height;
 }	t_img;
 
+typedef struct s_keys
+{
+	int	key_w;
+	int	key_a;
+	int	key_s;
+	int	key_d;
+	int	left_arrow;
+	int	right_arrow;
+}	t_keys;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -128,9 +155,11 @@ typedef struct s_data
 	int			width;
 	int			height;
 	int			mouse;
+	long		first_action;
 	t_player	*player;
 	t_map		*map;
 	t_wall		*wall;
+	t_keys		*keys;
 	t_img		tab_img[9];
 }	t_data;
 
@@ -139,19 +168,23 @@ void		move_forward(t_data *data);
 void		move_backwards(t_data *data);
 void		move_left(t_data *data);
 void		move_right(t_data *data);
-int			key_handler(int key, t_data *data);
+int			key_starter(int key, t_data *data);
+int			key_closer(int key, t_data *data);
+int			check_keys(t_data *data);
 
 /* events2.c */
-void		turn_left(t_data *data);
-void		turn_right(t_data *data);
+void		turn_left(t_data *data, double rotation_speed);
+void		turn_right(t_data *data, double rotation_speed);
 int			c_handler(t_data *data);
 int			handle_mouse(int x, int y, t_data *data);
 
 /* init.c */
 t_wall		*init_wall(t_data *data);
 void		init_imgs(t_img *tab_img);
+t_keys		*init_keys(t_data *data);
 void		init_data(t_data *data);
 void		init_mlx(t_data *data);
+long		get_time(void);
 
 /* init2.c */
 t_map		*init_map(void);
