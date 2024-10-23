@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:55:55 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/22 14:11:54 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/23 09:23:41 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ void	ft_free_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->tab_img[DOOR].img);
 	if (data->tab_img[DOOR_1].img)
 		mlx_destroy_image(data->mlx, data->tab_img[DOOR_1].img);
-	if (data->tab_img[PICTO_W].img)
-		mlx_destroy_image(data->mlx, data->tab_img[PICTO_W].img);
-	if (data->tab_img[PICTO_D].img)
-		mlx_destroy_image(data->mlx, data->tab_img[PICTO_D].img);
 }
 
 void	ft_free_data(t_data *data)

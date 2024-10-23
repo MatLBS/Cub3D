@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:57:45 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/22 15:50:51 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/23 09:22:17 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,15 @@ int	key_starter(int key, t_data *data)
 	if (key == XK_e)
 		handle_door(data);
 	if (key == 65507 && data->mouse == 0)
+	{
+		mlx_mouse_hide(data->mlx, data->win);
 		data->mouse = 1;
+	}
 	else if (key == 65507 && data->mouse == 1)
+	{
+		mlx_mouse_show(data->mlx, data->win);
 		data->mouse = 0;
+	}
 	return (0);
 }
 

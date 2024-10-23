@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:32:15 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 11:43:13 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:41:09 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_line(char *str, t_data *data, int y)
 	while (str[++i])
 	{
 		if (str[i] != '1' && str[i] != '0' && str[i] != ' ' && str[i] != 'N' \
-		&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W' && str[i] != 'D')
+		&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W' && str[i] != 'D' && str[i] != 'Z')
 		{
 			printf("Error : Bad input in the map.\n");
 			return (ft_free_data(data), exit(EXIT_FAILURE), 0);

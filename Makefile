@@ -6,7 +6,7 @@
 #    By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 21:07:58 by matle-br          #+#    #+#              #
-#    Updated: 2024/10/22 14:33:13 by matle-br         ###   ########.fr        #
+#    Updated: 2024/10/23 10:21:28 by matle-br         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = Cub3D
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -O3 -mtune=native -flto
-MLX_FLAGS = -L$(PATH_MINILIBX) -lmlx -lX11 -lXext -lm -lz
+MLX_FLAGS = -L$(PATH_MINILIBX) -lmlx -lX11 -lXext -lm -lz -lXfixes
 GREEN = \033[32m
 YELLOW = \033[33m
 ROUGE = \033[1;31m

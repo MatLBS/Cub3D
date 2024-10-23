@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/22 17:12:32 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:37:21 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# define WIDTH 800
-# define HEIGHT 800
-# define WIDTH_XPM 100
-# define HEIGHT_XPM 100
+// # define WIDTH 800
+// # define HEIGHT 800
+// # define WIDTH_XPM 100
+// # define HEIGHT_XPM 100
 # define MOVE_SPEED 0.05
 # define TURN_SPEED 0.05
 # define SIZE_SQUARE 20
@@ -40,13 +40,13 @@
 # define FIRST_SENTENCE "Welcome, this is a manual on how you can play \
 with the keyboard!"
 
-# define SECOND_SENTENCE "1 -> First, you can use the W, S, A and D to move the player."
+# define SECOND_SENTENCE "1 -> First, use W, S, A and D to move the player."
 
-# define THIRD_SENTENCE "2 -> Then, you can use the two arrows <- | -> to move your point of view."
+# define THIRD_SENTENCE "2 -> Then, use the two arrows <- | -> to move your point of view."
 
-# define FOURTH_SENTENCE "3 -> You can press the buuton 'e' near a door to open/close it."
+# define FOURTH_SENTENCE "3 -> Press the button 'e' near a door to open/close it."
 
-# define FIFTH_SENTENCE "4 -> You can press 'Ctrl' to move your point of view with the mouse."
+# define FIFTH_SENTENCE "4 -> Press 'Ctrl' to move your point of view with the mouse."
 
 # define SIXTH_SENTENCE "5 -> Press again 'Ctrl' to disable this feature."
 
@@ -61,8 +61,12 @@ with the keyboard!"
 # define WEST 4
 # define DOOR 5
 # define DOOR_1 6
-# define PICTO_W 7
-# define PICTO_D 8
+# define FRAME_1 7
+# define FRAME_2 8
+# define FRAME_3 9
+# define FRAME_4 10
+# define FRAME_5 11
+# define FRAME_6 12
 
 /*---------------------------------------------------*/
 
@@ -93,6 +97,7 @@ typedef struct s_wall
 	int		height_xpm;
 	int		face;
 	int		hit_door;
+	int		hit_zombie;
 }	t_wall;
 
 typedef struct s_player
@@ -160,7 +165,7 @@ typedef struct s_data
 	t_map		*map;
 	t_wall		*wall;
 	t_keys		*keys;
-	t_img		tab_img[9];
+	t_img		tab_img[13];
 }	t_data;
 
 /* events.c */

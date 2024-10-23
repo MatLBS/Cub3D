@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:27:01 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 15:59:45 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:39:22 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,16 @@ void	create_imgs(t_data *data)
 	create_img(&data->tab_img[WEST], data, data->map->we);
 	create_img(&data->tab_img[DOOR], data, "textures/horror/door.xpm");
 	create_img(&data->tab_img[DOOR_1], data, "textures/horror/other_door.xpm");
-	create_img(&data->tab_img[PICTO_W], data, "textures/horror/picto_wall.xpm");
-	create_img(&data->tab_img[PICTO_D], data, "textures/horror/picto_door.xpm");
+	create_img(&data->tab_img[FRAME_1], data, "textures/horror/frame1.xpm");
+	create_img(&data->tab_img[FRAME_2], data, "textures/horror/frame2.xpm");
+	create_img(&data->tab_img[FRAME_3], data, "textures/horror/frame3.xpm");
+	create_img(&data->tab_img[FRAME_4], data, "textures/horror/frame4.xpm");
+	create_img(&data->tab_img[FRAME_5], data, "textures/horror/frame5.xpm");
+	create_img(&data->tab_img[FRAME_6], data, "textures/horror/frame6.xpm");
+	// printf("%d\n", data->tab_img[FRAME_1].height);
+	// printf("%d\n", data->tab_img[FRAME_1].width);
 	generate_background(&data->tab_img[BACKGROUND], data);
 }
+
+
+// Couleur arriere plan zombie = 10, 80, 7

@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:55:31 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/21 16:18:55 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:44:44 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static void	handle_door(t_data *data)
 			data->wall->face = DOOR_1;
 	}
 }
+
+// static void	handle_zombie(t_data *data)
+// {
+// 	data->wall->face = FRAME_1;
+// }
 
 int	size_tab(char **tab)
 {
@@ -72,12 +77,14 @@ void	get_texture_color_suite(t_data *data, int pixelX, int y)
 	if (data->wall->side == 1 && data->player->raydiry)
 		data->player->texx = data->tab_img[data->wall->face].width - \
 			data->player->texx - 1;
-	step = 1.0 * data->tab_img[data->wall->face].height / \
+	step = (1.0 * data->tab_img[data->wall->face].height) / \
 		data->wall->lineheight;
 	data->player->texpos = (data->wall->drawstart - data->height / 2 + \
 		data->wall->lineheight / 2) * step;
 	while (y < data->wall->drawend)
 	{
+		printf("height = %d\n", data->tab_img[FRAME_1].height);
+		// printf("height = %d\n", data->tab_img[FRAME_1].height);
 		data->player->texy = (int)data->player->texpos & \
 			(data->tab_img[data->wall->face].height - 1);
 		if (data->player->texy >= data->tab_img[data->wall->face].height)
@@ -99,10 +106,12 @@ void	get_texture_color(t_data *data, int pixelX)
 	y = data->wall->drawstart;
 	if (data->wall->hit_door == 1)
 		handle_door(data);
+	// else if (data->wall->hit_zombie == 1)
+	// 	handle_zombie(data);
 	else if (data->wall->side == 0)
 	{
 		if (data->player->raydirx > 0)
-			data->wall->face = EAST;
+			data->wall->face = FRAME_1;
 		else
 			data->wall->face = WEST;
 	}
