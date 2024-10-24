@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:07:12 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/23 13:47:11 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:20:17 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ void	algo_dda_suite(t_data *data, int hit)
 		{
 			hit = 1;
 			data->wall->hit_door = 0;
+			// data->wall->hit_zombie = 0;
 		}
 		if (data->map->map[data->player->mapy][data->player->mapx] == 'D')
 		{
 			hit = 1;
 			data->wall->hit_door = 1;
 		}
-		if (data->map->map[data->player->mapy][data->player->mapx] == 'Z')
-		{
-			hit = 1;
-			data->wall->hit_zombie = 1;
-		}
+		// if (data->map->map[data->player->mapy][data->player->mapx] == 'Z')
+		// {
+		// 	hit = 1;
+		// 	data->wall->hit_zombie = 1;
+		// }
 	}
 	if (data->wall->side == 0)
 		data->wall->perpwalldist = (data->player->sidedistx - \
@@ -88,11 +89,10 @@ void	algo_dda(t_data *data)
 void	display_wall(t_data *data, int x)
 {
 	data->wall->lineheight = (int)(data->height / data->wall->perpwalldist);
-	data->wall->drawstart = ((data->wall->lineheight * -1) / 2) + \
-		(data->height / 2);
+	data->wall->drawstart = ((data->wall->lineheight * -1) / 2 + data->height / 2);
 	if (data->wall->drawstart < 0)
 		data->wall->drawstart = 0;
-	data->wall->drawend = (data->wall->lineheight / 2) + (data->height / 2);
+	data->wall->drawend = data->wall->lineheight / 2 + data->height / 2;
 	if (data->wall->drawend >= data->height)
 		data->wall->drawend = data->height - 1;
 	get_texture_color(data, x);
@@ -114,6 +114,7 @@ void	launch_rays(t_data *data)
 		display_wall(data, x);
 		x++;
 	}
+	create_sprites(data);
 	create_minimap(data);
 }
 

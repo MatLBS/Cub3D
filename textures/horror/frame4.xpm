@@ -1,7 +1,7 @@
 /* XPM */
 static char * new_frame4_xpm[] = {
 "300 350 10171 3",
-"   	c #1ACC12",
+"   	c 0",
 ".  	c #66D365",
 "+  	c #9DDD9E",
 "@  	c #AFD6AD",

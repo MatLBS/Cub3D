@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:17:16 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/22 15:19:24 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:33:10 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	find_pixel(t_data *data, int x, int y)
 		my_mlx_pixel_put_data(data, x + 100, y + 700, 13882323);
 	else if (data->map->map[(int)new_y][(int)new_x] == 'D' || data->map->cpy_map[(int)new_y][(int)new_x] == 'D')
 		my_mlx_pixel_put_data(data, x + 100, y + 700, 16761035);
+	else if (data->map->map[(int)new_y][(int)new_x] == 'Z')
+		my_mlx_pixel_put_data(data, x + 100, y + 700, 10535581);
 	else
 		my_mlx_pixel_put_data(data, x + 100, y + 700, 16777215);
 }

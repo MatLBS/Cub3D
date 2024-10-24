@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:50:57 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/19 14:11:00 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/24 10:50:35 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,10 @@ t_player	*init_player(t_data *data)
 	player->camerax = 0;
 	player->raydirx = 0;
 	player->raydiry = 0;
+	player->texx = 0;
+	player->texy = 0;
+	player->wallx = 0;
+	player->texpos = 0;
+	player->step = 0;
 	return (player);
 }

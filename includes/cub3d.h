@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 08:50:09 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/23 16:37:21 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:49:58 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ with the keyboard!"
 
 # define SIXTH_SENTENCE "5 -> Press again 'Ctrl' to disable this feature."
 
-# define SEVENTH_SENTENCE "Have fun !"
+# define SEVENTH_SENTENCE "Have fun and careful to the Zombies !"
 
 /* ----------- Définition de mes images -------------*/
 
@@ -123,6 +123,7 @@ typedef struct s_player
 	int		texy;
 	double	wallx;
 	double	texpos;
+	double	step;
 }	t_player;
 
 typedef struct s_img
@@ -248,6 +249,10 @@ void		raycasting(t_data *data);
 /* minimap.c */
 void		find_pixel(t_data *data, int x, int y);
 void		create_minimap(t_data *data);
+
+/* sprites.c */
+void	draw_sprites(t_data *data, int map_x, int map_y);
+void		create_sprites(t_data *data);
 
 /* raycasting_utils.c */
 void		which_fov(t_data *data);

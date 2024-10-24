@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:27:01 by matle-br          #+#    #+#             */
-/*   Updated: 2024/10/23 17:39:22 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:31:48 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	create_imgs(t_data *data)
 	create_img(&data->tab_img[FRAME_4], data, "textures/horror/frame4.xpm");
 	create_img(&data->tab_img[FRAME_5], data, "textures/horror/frame5.xpm");
 	create_img(&data->tab_img[FRAME_6], data, "textures/horror/frame6.xpm");
-	// printf("%d\n", data->tab_img[FRAME_1].height);
-	// printf("%d\n", data->tab_img[FRAME_1].width);
 	generate_background(&data->tab_img[BACKGROUND], data);
 }
 
